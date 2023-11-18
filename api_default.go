@@ -18,63 +18,13 @@ import (
 	"net/url"
 )
 
-type DefaultApi interface {
-
-	/*
-		FilesGet List all files
-
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiFilesGetRequest
-	*/
-	FilesGet(ctx context.Context) ApiFilesGetRequest
-
-	// FilesGetExecute executes the request
-	//  @return []File
-	FilesGetExecute(r ApiFilesGetRequest) ([]File, *http.Response, error)
-
-	/*
-		FilesPost Create a new file
-
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiFilesPostRequest
-	*/
-	FilesPost(ctx context.Context) ApiFilesPostRequest
-
-	// FilesPostExecute executes the request
-	//  @return File
-	FilesPostExecute(r ApiFilesPostRequest) (*File, *http.Response, error)
-
-	/*
-		FoldersGet List all folders
-
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiFoldersGetRequest
-	*/
-	FoldersGet(ctx context.Context) ApiFoldersGetRequest
-
-	// FoldersGetExecute executes the request
-	//  @return []Folder
-	FoldersGetExecute(r ApiFoldersGetRequest) ([]Folder, *http.Response, error)
-
-	/*
-		FoldersPost Create a new folder
-
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiFoldersPostRequest
-	*/
-	FoldersPost(ctx context.Context) ApiFoldersPostRequest
-
-	// FoldersPostExecute executes the request
-	//  @return Folder
-	FoldersPostExecute(r ApiFoldersPostRequest) (*Folder, *http.Response, error)
-}
 
 // DefaultApiService DefaultApi service
 type DefaultApiService service
 
 type ApiFilesGetRequest struct {
-	ctx        context.Context
-	ApiService DefaultApi
+	ctx context.Context
+	ApiService *DefaultApiService
 }
 
 func (r ApiFilesGetRequest) Execute() ([]File, *http.Response, error) {
@@ -84,25 +34,24 @@ func (r ApiFilesGetRequest) Execute() ([]File, *http.Response, error) {
 /*
 FilesGet List all files
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiFilesGetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiFilesGetRequest
 */
 func (a *DefaultApiService) FilesGet(ctx context.Context) ApiFilesGetRequest {
 	return ApiFilesGetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return []File
+//  @return []File
 func (a *DefaultApiService) FilesGetExecute(r ApiFilesGetRequest) ([]File, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []File
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.FilesGet")
@@ -171,9 +120,9 @@ func (a *DefaultApiService) FilesGetExecute(r ApiFilesGetRequest) ([]File, *http
 }
 
 type ApiFilesPostRequest struct {
-	ctx        context.Context
-	ApiService DefaultApi
-	file       *File
+	ctx context.Context
+	ApiService *DefaultApiService
+	file *File
 }
 
 func (r ApiFilesPostRequest) File(file File) ApiFilesPostRequest {
@@ -188,25 +137,24 @@ func (r ApiFilesPostRequest) Execute() (*File, *http.Response, error) {
 /*
 FilesPost Create a new file
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiFilesPostRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiFilesPostRequest
 */
 func (a *DefaultApiService) FilesPost(ctx context.Context) ApiFilesPostRequest {
 	return ApiFilesPostRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return File
+//  @return File
 func (a *DefaultApiService) FilesPostExecute(r ApiFilesPostRequest) (*File, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *File
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.FilesPost")
@@ -280,8 +228,8 @@ func (a *DefaultApiService) FilesPostExecute(r ApiFilesPostRequest) (*File, *htt
 }
 
 type ApiFoldersGetRequest struct {
-	ctx        context.Context
-	ApiService DefaultApi
+	ctx context.Context
+	ApiService *DefaultApiService
 }
 
 func (r ApiFoldersGetRequest) Execute() ([]Folder, *http.Response, error) {
@@ -291,25 +239,24 @@ func (r ApiFoldersGetRequest) Execute() ([]Folder, *http.Response, error) {
 /*
 FoldersGet List all folders
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiFoldersGetRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiFoldersGetRequest
 */
 func (a *DefaultApiService) FoldersGet(ctx context.Context) ApiFoldersGetRequest {
 	return ApiFoldersGetRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return []Folder
+//  @return []Folder
 func (a *DefaultApiService) FoldersGetExecute(r ApiFoldersGetRequest) ([]Folder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue []Folder
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  []Folder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.FoldersGet")
@@ -378,9 +325,9 @@ func (a *DefaultApiService) FoldersGetExecute(r ApiFoldersGetRequest) ([]Folder,
 }
 
 type ApiFoldersPostRequest struct {
-	ctx        context.Context
-	ApiService DefaultApi
-	folder     *Folder
+	ctx context.Context
+	ApiService *DefaultApiService
+	folder *Folder
 }
 
 func (r ApiFoldersPostRequest) Folder(folder Folder) ApiFoldersPostRequest {
@@ -395,25 +342,24 @@ func (r ApiFoldersPostRequest) Execute() (*Folder, *http.Response, error) {
 /*
 FoldersPost Create a new folder
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiFoldersPostRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiFoldersPostRequest
 */
 func (a *DefaultApiService) FoldersPost(ctx context.Context) ApiFoldersPostRequest {
 	return ApiFoldersPostRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return Folder
+//  @return Folder
 func (a *DefaultApiService) FoldersPostExecute(r ApiFoldersPostRequest) (*Folder, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *Folder
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *Folder
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultApiService.FoldersPost")

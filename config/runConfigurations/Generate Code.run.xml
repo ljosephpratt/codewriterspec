@@ -16,10 +16,6 @@
           <option name="name" value="packageVersion" />
           <option name="value" value="0.0.1" />
         </CliArgumentViewModel>
-        <CliArgumentViewModel>
-          <option name="name" value="generateInterfaces" />
-          <option name="value" value="true" />
-        </CliArgumentViewModel>
       </list>
     </option>
     <option name="generatorType" value="OPENAPI_GENERATOR_V6" />
