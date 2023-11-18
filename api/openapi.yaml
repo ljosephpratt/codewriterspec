@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  description: An API for managing folders and files
+  title: Simple File and Folder API
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /folders:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Folder'
+                type: array
+          description: A list of folders
+      summary: List all folders
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Folder'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+          description: Successfully created a new folder
+      summary: Create a new folder
+  /files:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/File'
+                type: array
+          description: A list of files
+      summary: List all files
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/File'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+          description: Successfully created a new file
+      summary: Create a new file
+components:
+  schemas:
+    Folder:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Unique identifier for the folder
+          type: string
+        name:
+          description: Name of the folder
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    File:
+      example:
+        name: name
+        id: id
+        folderId: folderId
+      properties:
+        id:
+          description: Unique identifier for the file
+          type: string
+        name:
+          description: Name of the file
+          type: string
+        folderId:
+          description: Identifier of the folder the file belongs to
+          type: string
+      required:
+      - folderId
+      - id
+      - name
+      type: object
